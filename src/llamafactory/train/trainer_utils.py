@@ -473,7 +473,7 @@ def get_batch_logps(
     return (per_token_logps * loss_mask).sum(-1), loss_mask.sum(-1)
 
 def factory_glm4v_trainer(BastTrainer):
-    class GLM4VTrainer:
+    class GLM4VTrainer(BastTrainer):
         def compute_loss(self, model, inputs, return_outputs=False):
             # Padding for labels and attention masks cuz modeling_glm4 will auto filling 1600 image tokens.
             boi_ids = self.tokenizer.all_special_ids[self.tokenizer.all_special_tokens.index("<|begin_of_image|>")]
